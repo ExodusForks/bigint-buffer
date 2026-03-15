@@ -17,14 +17,12 @@
     "coverage": "istanbul cover ./test/index.js",
     "coveralls": "npm run coverage && coveralls <coverage/lcov.info",
     "lint": "gts check",
-    "install": "npm run rebuild || echo \"Couldn't build bindings. Non-native version used.\"",
     "prepare": "npm run compile",
     "prepublishOnly": "rm -rf build/Release; rm build/Makefile; rm build/gyp-*; rm build/*.mk; rm build/*.Makefile; rm *.tgz",
     "test:browser": "karma start karma.conf.js",
     "test:node": "mocha -r ts-node/register src/**/*.spec.ts --timeout 40000",
     "benchmark": "node -r ts-node/register src/index.bench.ts",
     "typedoc": "typedoc --out docs $(pwd)/src $(pwd)/helper --target es6 --mode file --tsconfig ./tsconfig.json --excludePrivate --excludeProtected --excludeNotExported --exclude '**/*+(spec|bench).ts'",
-    "rebuild": "node-gyp rebuild",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "mkdirp dist && tsc -p . && rollup -c > dist/node.js && cross-env BROWSER=true rollup -c > dist/browser.js && cpx \"build/src/*.d.ts\" dist",
@@ -46,9 +44,6 @@
     "napi"
   ],
   "license": "Apache-2.0",
-  "dependencies": {
-    "bindings": "^1.3.0"
-  },
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
     "@types/bn.js": "^4.11.2",
